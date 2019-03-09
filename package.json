@@ -1,0 +1,24 @@
+{
+  "name": "historic-db-entity-pattern",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.3.4",
+    "@babel/plugin-proposal-class-properties": "^7.3.4",
+    "@babel/plugin-proposal-object-rest-spread": "^7.3.4",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-typescript": "^7.3.3",
+    "@babel/register": "^7.0.0",
+    "knex": "^0.16.3",
+    "mysql2": "^1.6.5",
+    "objection": "^1.6.3",
+    "typescript": "^3.3.3333"
+  }
+}
