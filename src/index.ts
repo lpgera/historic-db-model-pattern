@@ -1,11 +1,11 @@
 import Knex from 'knex'
 import knexfile from '../knexfile'
-import {Model} from 'objection'
+import { Model } from 'objection'
 import ExampleModel from './models/ExampleModel'
 import ExampleHistoricModel from './models/ExampleHistoricModel'
-import {v4 as uuid} from 'uuid'
+import { v4 as uuid } from 'uuid'
 
-(async () => {
+;(async () => {
   const knex = Knex(knexfile)
   await knex.migrate.latest()
   Model.knex(knex)

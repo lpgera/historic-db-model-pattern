@@ -2,7 +2,6 @@ import BaseModel from './BaseModel'
 import * as objection from 'objection'
 
 export default class HistoricDbModel extends BaseModel {
-
   validFrom: Date
   obsolete: boolean
   originalId: string | null
@@ -15,17 +14,20 @@ export default class HistoricDbModel extends BaseModel {
 
   async $beforeUpdate() {
     if (!this.createdAt || !this.updatedAt || !this.validFrom) {
-      throw new Error('Invalid update! Try using static historicUpdate method instead!')
+      throw new Error(
+        'Invalid update! Try using static historicUpdate method instead!'
+      )
     }
   }
 
-  static async historicUpdate<T extends HistoricDbModel>(id: string, props: { [K in keyof T]?: T[K] }) {
+  static async historicUpdate<T extends HistoricDbModel>(
+    id: string,
+    props: { [K in keyof T]?: T[K] }
+  ) {
     const now = new Date()
 
-    await objection.transaction(this, async (thisInTransaction) => {
-      const old: HistoricDbModel = await thisInTransaction
-        .query()
-        .findById(id)
+    await objection.transaction(this, async thisInTransaction => {
+      const old: HistoricDbModel = await thisInTransaction.query().findById(id)
 
       const obsoleteCopy = {
         ...old,
@@ -43,14 +45,11 @@ export default class HistoricDbModel extends BaseModel {
         validFrom: now,
       }
 
-      await thisInTransaction
-        .query()
-        .insert(obsoleteCopy)
+      await thisInTransaction.query().insert(obsoleteCopy)
       await thisInTransaction
         .query()
         .update(newProps)
         .where('id', id)
     })
   }
-
 }

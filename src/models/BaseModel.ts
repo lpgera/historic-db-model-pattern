@@ -1,8 +1,7 @@
-import {v4 as uuid} from 'uuid'
-import {Model} from 'objection'
+import { v4 as uuid } from 'uuid'
+import { Model } from 'objection'
 
 export default class BaseModel extends Model {
-
   id: string
   createdAt: Date
   updatedAt: Date
@@ -17,5 +16,4 @@ export default class BaseModel extends Model {
   async $beforeUpdate(opt, context) {
     this.updatedAt = new Date()
   }
-
 }
