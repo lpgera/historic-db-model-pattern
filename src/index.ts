@@ -65,11 +65,13 @@ import { v4 as uuid } from 'uuid'
 
   console.log(await ExampleHistoricModel.query())
 
-  await ExampleHistoricModel.query<ExampleHistoricModel>()
+  await ExampleHistoricModel.query()
     .update({
       secondProperty: 4,
     })
-    .where('id', ehid)
+    .where({
+      id: ehid,
+    })
 
   await knex.destroy()
 })()
