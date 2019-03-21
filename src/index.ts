@@ -53,13 +53,13 @@ import { v4 as uuid } from 'uuid'
 
   console.log(await ExampleHistoricModel.query())
 
-  await ExampleHistoricModel.historicUpdate<ExampleHistoricModel>(ehid, {
+  await ExampleHistoricModel.historicUpdate(ehid, {
     secondProperty: 2,
   })
 
   console.log(await ExampleHistoricModel.query())
 
-  await ExampleHistoricModel.historicUpdate<ExampleHistoricModel>(ehid, {
+  await ExampleHistoricModel.historicUpdate(ehid, {
     secondProperty: 3,
   })
 

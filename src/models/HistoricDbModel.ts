@@ -20,9 +20,10 @@ export default class HistoricDbModel extends BaseModel {
     }
   }
 
-  static async historicUpdate<T extends HistoricDbModel>(
+  static async historicUpdate<T extends typeof HistoricDbModel>(
+    this: T,
     id: string,
-    props: { [K in keyof T]?: T[K] }
+    props: { [K in keyof InstanceType<T>]?: InstanceType<T>[K] }
   ) {
     const now = new Date()
 
