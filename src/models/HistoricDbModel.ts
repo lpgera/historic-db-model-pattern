@@ -2,9 +2,9 @@ import BaseModel from './BaseModel'
 import * as objection from 'objection'
 
 export default class HistoricDbModel extends BaseModel {
-  validFrom: Date
-  obsolete: boolean
-  originalId: string | null
+  validFrom!: Date
+  obsolete!: boolean
+  originalId!: string | null
 
   $beforeInsert() {
     super.$beforeInsert()
@@ -28,11 +28,15 @@ export default class HistoricDbModel extends BaseModel {
     const now = new Date()
 
     await objection.transaction(this, async thisInTransaction => {
-      const old: HistoricDbModel = await thisInTransaction.query().findById(id)
+      const old = await thisInTransaction.query().findById(id)
+
+      if (!old) {
+        throw new Error(`Could not find ${this.tableName} record with id=${id}`)
+      }
 
       const obsoleteCopy = {
         ...old,
-        id: null,
+        id: undefined,
         obsolete: true,
         validFrom: old.updatedAt,
         createdAt: now,

@@ -2,9 +2,9 @@ import { v4 as uuid } from 'uuid'
 import { Model } from 'objection'
 
 export default class BaseModel extends Model {
-  id: string
-  createdAt: Date
-  updatedAt: Date
+  id!: string
+  createdAt!: Date
+  updatedAt!: Date
 
   $beforeInsert() {
     const now = new Date()
@@ -13,7 +13,7 @@ export default class BaseModel extends Model {
     this.updatedAt = this.updatedAt || now
   }
 
-  async $beforeUpdate(opt, context) {
+  async $beforeUpdate() {
     this.updatedAt = new Date()
   }
 }
