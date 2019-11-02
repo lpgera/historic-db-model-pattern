@@ -12,7 +12,7 @@ module.exports.up = async knex => {
     table.dateTime('updatedAt', 3)
     table.dateTime('validFrom', 3)
     table.boolean('obsolete').notNullable()
-    table.string('originalId')
+    table.string('currentId')
     table.string('firstProperty').notNullable()
     table.integer('secondProperty').notNullable()
   })
