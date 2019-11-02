@@ -4,7 +4,7 @@ import * as objection from 'objection'
 export default class HistoricDbModel extends BaseModel {
   validFrom!: Date
   obsolete!: boolean
-  originalId!: string | null
+  currentId!: string | null
 
   $beforeInsert() {
     super.$beforeInsert()
@@ -41,7 +41,7 @@ export default class HistoricDbModel extends BaseModel {
         validFrom: old.updatedAt,
         createdAt: now,
         updatedAt: now,
-        originalId: old.id,
+        currentId: old.id,
       }
       const newProps = {
         ...props,
